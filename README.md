@@ -1,8 +1,8 @@
 # HtmlText
  A simple HTML renderer for Compose Multiplatform.
 
-![Dark Example](DemoData/Dark.png)
-![Light Example](DemoData/Light.png)
+<img src="DemoData/Dark.png" width="40%">
+<img src="DemoData/Light.png" width="40%">
 
 ### Usage
 ```kotlin
@@ -24,4 +24,4 @@ so URLs pointing to `/<dir>` are picked up.
  * | Tables | Implementation |
    |--------|----------------------------------|
    | (WIP)    | `<table><tbody></tbody></table>` |
- * ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flive.staticflickr.com%2F6146%2F5991999576_5b933da0db_b.jpg&f=1&nofb=1): \<img src="">
+ * <img src="https://live.staticflickr.com/6146/5991999576_7dac1e9e51_h.jpg" width="40%">: \<img src="">
