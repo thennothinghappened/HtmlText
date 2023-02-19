@@ -1,5 +1,6 @@
 package org.orca.htmltext
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -72,7 +73,7 @@ private fun HtmlText(
                     "h3" ->
                         HtmlParagraph { HtmlText(it, modifier, style.copy(fontSize = MaterialTheme.typography.titleSmall.fontSize), uriHandler, domain) }
                     "blockquote" ->
-                        HtmlBlockQuote {
+                        HtmlBlockQuote(style = style) {
                             HtmlText(it, modifier, style, uriHandler, domain)
                         }
                     "br" -> HtmlLineBreak()
@@ -169,6 +170,7 @@ private fun HtmlParagraph(
 @Composable
 private fun HtmlBlockQuote(
     modifier: Modifier = Modifier,
+    style: TextStyle = TextStyle(),
     content: @Composable () -> Unit
 ) {
     Row(
@@ -176,10 +178,11 @@ private fun HtmlBlockQuote(
             .padding(start = 8.dp)
             .height(IntrinsicSize.Min)
     ) {
-        Divider(
+        Box(
             Modifier
                 .fillMaxHeight()
                 .width(4.dp)
+                .background(MaterialTheme.colorScheme.onBackground)
         )
         HtmlParagraph(
             modifier
