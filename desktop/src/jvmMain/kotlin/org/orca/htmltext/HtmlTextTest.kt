@@ -22,6 +22,7 @@ private val input = """
     <b>Bold text</b>, and some <i>italic text</i>. A <i><b><a href="https://example.com">Bold, Italic Link</a></b></i>
     <blockquote>
     Something famous said by some person!
+    <hr>
     <ul>
         <li>List item</li>
         <li>List item #2</li>
