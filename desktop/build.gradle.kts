@@ -7,9 +7,8 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "org.orca"
-version = "1.0-SNAPSHOT"
-
+group = "org.orca.htmltext"
+version = "1.0.0"
 
 kotlin {
     jvm {
@@ -39,3 +38,4 @@ compose.desktop {
         }
     }
 }
+

@@ -5,7 +5,7 @@ plugins {
 }
 
 group "org.orca.htmltext"
-version "1.0-SNAPSHOT"
+version "1.0.0"
 
 repositories {
     jcenter()
@@ -17,11 +17,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(33)
+    compileSdk = 33
     defaultConfig {
         applicationId = "org.orca.htmltext.android"
-        minSdkVersion(23)
-        targetSdkVersion(33)
+        minSdk = 24
+        compileSdk = 33
         versionCode = 1
         versionName = "1.0-SNAPSHOT"
     }
