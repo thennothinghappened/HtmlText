@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -182,7 +183,7 @@ private fun HtmlBlockQuote(
             Modifier
                 .fillMaxHeight()
                 .width(4.dp)
-                .background(MaterialTheme.colorScheme.onBackground)
+                .background(DividerDefaults.color)
         )
         HtmlParagraph(
             modifier
@@ -241,6 +242,7 @@ private fun HtmlTable(
         Column(
             modifier
                 .height(IntrinsicSize.Min)
+                .border(2.dp, DividerDefaults.color)
         ) {
             // handle elements explicitly in the body
             body.forEach { body ->
@@ -255,7 +257,7 @@ private fun HtmlTable(
                                 Modifier
                                     .weight(1f)
                                     .fillMaxHeight()
-                                    .border(1.dp, MaterialTheme.colorScheme.outline)
+                                    .border(1.dp, DividerDefaults.color)
                             ) {
                                 HtmlText(
                                     tableCell,

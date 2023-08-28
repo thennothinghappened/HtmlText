@@ -1,5 +1,5 @@
-group "org.orca.htmltext"
-version "1.0-SNAPSHOT"
+group = "org.orca.htmltext"
+version = "1.0-SNAPSHOT"
 
 allprojects {
     repositories {
