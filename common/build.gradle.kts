@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform")
@@ -6,19 +8,19 @@ plugins {
     id("maven-publish")
 }
 
-group = "org.orca.htmltext"
-version = "1.0-SNAPSHOT"
-
 val GITHUB_USER = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
 val GITHUB_TOKEN = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
 
 kotlin {
-    android()
-    jvm("desktop") {
+    jvm("desktop")
+    jvmToolchain(18)
+
+    androidTarget {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.jvmTarget = "1.8"
         }
     }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -31,20 +33,10 @@ kotlin {
                 implementation("com.alialbaali.kamel:kamel-image:0.4.0")
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
         val androidMain by getting {
             dependencies {
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.10.1")
-            }
-        }
-        val androidTest by getting {
-            dependencies {
-                implementation("junit:junit:4.13.2")
             }
         }
         val desktopMain by getting {
@@ -52,11 +44,11 @@ kotlin {
                 api(compose.preview)
             }
         }
-        val desktopTest by getting
     }
 }
 
 android {
+    namespace = group.toString()
     compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {

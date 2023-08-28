@@ -1,5 +1,5 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,16 +7,12 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "org.orca.htmltext"
-version = "1.0.0"
-
 kotlin {
+    jvmToolchain(18)
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
         withJava()
     }
+
     sourceSets {
         val jvmMain by getting {
             dependencies {

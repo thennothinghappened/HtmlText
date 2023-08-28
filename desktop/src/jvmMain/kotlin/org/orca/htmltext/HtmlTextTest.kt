@@ -1,12 +1,15 @@
 package org.orca.htmltext
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -36,7 +39,10 @@ private val input = """
             </tr>
             <tr>
                 <td>Yet another table item</td>
-                <td>One more table item again</td>
+                <td>One more table item again<ol>
+            <li>List item</li>
+            <li>List item #2</li>
+        </ol></td>
             </tr>
         </tbody>
     </table>
@@ -48,13 +54,10 @@ private val input = """
 @Composable
 private fun HtmlTextPreviewContent() {
     Surface(
-        Modifier.fillMaxSize()
+        Modifier
+            .fillMaxSize()
     ) {
-        Surface(
-            Modifier.padding(8.dp)
-        ) {
-            HtmlText(input)
-        }
+        HtmlText(input, Modifier.padding(8.dp))
     }
 }
 
@@ -69,9 +72,7 @@ private fun LightHtmlTextPreview() {
 @Preview
 @Composable
 private fun DarkHtmlTextPreview() {
-    MaterialTheme(
-        darkColorScheme()
-    ) {
+    MaterialTheme(darkColorScheme()) {
         HtmlTextPreviewContent()
     }
 }

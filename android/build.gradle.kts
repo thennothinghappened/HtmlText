@@ -1,29 +1,30 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("org.jetbrains.compose")
     id("com.android.application")
     kotlin("android")
 }
 
-group "org.orca.htmltext"
-version "1.0.0"
-
-repositories {
-    jcenter()
-}
-
 dependencies {
     implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.5.0")
+    implementation("androidx.activity:activity-compose:1.7.2")
 }
 
 android {
+    namespace = group.toString()
     compileSdk = 33
+
+    lint {
+        abortOnError = false
+    }
+
     defaultConfig {
-        applicationId = "org.orca.htmltext.android"
+        applicationId = "$group.android"
         minSdk = 24
         compileSdk = 33
         versionCode = 1
-        versionName = "1.0-SNAPSHOT"
+        versionName = version.toString()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
