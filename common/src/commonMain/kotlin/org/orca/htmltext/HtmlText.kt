@@ -236,7 +236,7 @@ private fun HtmlTable(
 
 ) {
     val children =  node.children()
-    val body = children.filter { it.nodeName() == "tbody" }
+    val body = children.filter { it -> it.nodeName() == "tbody" }
 
     HtmlParagraph {
         Column(
