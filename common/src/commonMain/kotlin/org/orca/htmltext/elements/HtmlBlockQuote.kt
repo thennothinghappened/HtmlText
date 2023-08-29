@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 internal fun HtmlBlockQuote(
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle(),
     content: @Composable () -> Unit
 ) {
     Row(

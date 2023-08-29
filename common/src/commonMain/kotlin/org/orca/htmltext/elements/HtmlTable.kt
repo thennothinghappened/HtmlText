@@ -17,7 +17,7 @@ import org.orca.htmltext.HtmlText
 internal fun HtmlTable(
     node: Element,
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle(),
+    style: TextStyle,
     uriHandler: UriHandler = LocalUriHandler.current,
     domain: String? = null
 

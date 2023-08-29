@@ -30,7 +30,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "HtmlText"
-            packageVersion = "1.0.0"
+            packageVersion = version.toString()
         }
     }
 }

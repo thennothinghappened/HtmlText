@@ -16,7 +16,7 @@ import org.orca.htmltext.util.validateUrl
 internal fun HtmlLink(
     node: Element,
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle(),
+    style: TextStyle,
     uriHandler: UriHandler = LocalUriHandler.current,
     domain: String? = null
 ) {

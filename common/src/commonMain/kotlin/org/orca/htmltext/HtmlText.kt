@@ -24,7 +24,7 @@ import org.orca.htmltext.elements.HtmlParagraph
 fun HtmlText(
     document: String,
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle(),
+    style: TextStyle = MaterialTheme.typography.bodyMedium,
     uriHandler: UriHandler = LocalUriHandler.current,
     domain: String? = null
 ) {
@@ -39,7 +39,7 @@ fun HtmlText(
 internal fun HtmlText(
     node: Node,
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle(),
+    style: TextStyle,
     uriHandler: UriHandler = LocalUriHandler.current,
     domain: String? = null
 ) {
@@ -68,7 +68,7 @@ internal fun HtmlText(
                     "h3" ->
                         HtmlParagraph { HtmlText(it, modifier, style.copy(fontSize = MaterialTheme.typography.titleSmall.fontSize), uriHandler, domain) }
                     "blockquote" ->
-                        HtmlBlockQuote(style = style) {
+                        HtmlBlockQuote {
                             HtmlText(it, modifier, style, uriHandler, domain)
                         }
                     "br" -> HtmlLineBreak()

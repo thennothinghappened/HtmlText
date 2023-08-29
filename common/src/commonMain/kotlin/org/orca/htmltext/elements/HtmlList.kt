@@ -24,26 +24,21 @@ internal enum class HtmlListType {
 }
 
 @Composable
-private fun HtmlOrderedListDecorator(index: Int) {
-    Text(
-        "${index+1}.", style = MaterialTheme.typography.bodySmall
-    )
+private fun HtmlOrderedListDecorator(index: Int, style: TextStyle) {
+    Text(text = "${index+1}.", style = style)
 }
 
 @Composable
-private fun HtmlUnorderedListDecorator() {
-    Column(
-        Modifier.padding(
-            top = MaterialTheme.typography.bodySmall.fontSize.value.dp / 2
-        )
-    ) {
-        Box(
-            Modifier
-                .size(6.dp)
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.onSurface)
-        )
-    }
+private fun HtmlUnorderedListDecorator(style: TextStyle) {
+    val size = 4.dp
+
+    Box(
+        Modifier
+            .padding(top = style.lineHeight.value.dp / 2 - size / 2)
+            .size(size)
+            .clip(CircleShape)
+            .background(MaterialTheme.colorScheme.onSurface)
+    )
 }
 
 /**
@@ -54,7 +49,7 @@ internal fun HtmlList(
     node: Element,
     listType: HtmlListType,
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle(),
+    style: TextStyle,
     uriHandler: UriHandler = LocalUriHandler.current,
     domain: String? = null
 ) {
@@ -66,8 +61,8 @@ internal fun HtmlList(
             list.forEachIndexed { index, listItem ->
                 Row {
                     when (listType) {
-                        HtmlListType.ORDERED -> HtmlOrderedListDecorator(index)
-                        HtmlListType.UNORDERED -> HtmlUnorderedListDecorator()
+                        HtmlListType.ORDERED -> HtmlOrderedListDecorator(index, style)
+                        HtmlListType.UNORDERED -> HtmlUnorderedListDecorator(style)
                     }
 
                     Spacer(Modifier.size(4.dp))
