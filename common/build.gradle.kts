@@ -47,11 +47,11 @@ kotlin {
 
 android {
     namespace = group.toString()
-    compileSdk = 33
+    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 24
-        compileSdk = 33
+        compileSdk = 34
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

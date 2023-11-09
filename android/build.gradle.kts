@@ -8,12 +8,12 @@ plugins {
 
 dependencies {
     implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.activity:activity-compose:1.8.0")
 }
 
 android {
     namespace = group.toString()
-    compileSdk = 33
+    compileSdk = 34
 
     lint {
         abortOnError = false
@@ -22,7 +22,7 @@ android {
     defaultConfig {
         applicationId = "$group.android"
         minSdk = 24
-        compileSdk = 33
+        compileSdk = 34
         versionCode = 1
         versionName = version.toString()
     }
