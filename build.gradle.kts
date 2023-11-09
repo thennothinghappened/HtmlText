@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform") apply false
@@ -11,7 +9,7 @@ plugins {
 
 allprojects {
     group = "org.orca.htmltext"
-    version = "1.1.1"
+    version = "1.1.2"
 
     repositories {
         google()

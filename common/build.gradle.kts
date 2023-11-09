@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform")
@@ -30,13 +28,13 @@ kotlin {
                 api(compose.material3)
                 implementation("ca.gosyer:accompanist-flowlayout:0.25.2")
                 implementation("org.jsoup:jsoup:1.15.3")
-                implementation("com.alialbaali.kamel:kamel-image:0.4.0")
+                implementation("com.alialbaali.kamel:kamel-image:0.4.1")
             }
         }
         val androidMain by getting {
             dependencies {
                 api("androidx.appcompat:appcompat:1.6.1")
-                api("androidx.core:core-ktx:1.10.1")
+                api("androidx.core:core-ktx:1.12.0")
             }
         }
         val desktopMain by getting {
