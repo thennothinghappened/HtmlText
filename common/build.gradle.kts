@@ -11,7 +11,7 @@ val GITHUB_TOKEN = project.findProperty("gpr.key") as String? ?: System.getenv("
 
 kotlin {
     jvm("desktop")
-    jvmToolchain(18)
+    jvmToolchain(17)
 
     androidTarget {
         compilations.all {
