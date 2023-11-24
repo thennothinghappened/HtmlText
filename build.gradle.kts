@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     group = "org.orca.htmltext"
-    version = "1.2.3"
+    version = "1.2.2"
 
     repositories {
         google()
