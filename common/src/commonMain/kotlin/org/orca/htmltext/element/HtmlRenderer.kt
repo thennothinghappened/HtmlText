@@ -12,6 +12,7 @@ import org.orca.htmltext.util.nonEmptyChildren
 
 /**
  * [CompositionLocal] provider for a mapping between HTML tag names and renderers for them.
+ * You can override this to change how elements are rendered, or to extend the element list with custom ones!
  */
 val LocalHtmlTextTagMap = staticCompositionLocalOf {
     mapOf(
