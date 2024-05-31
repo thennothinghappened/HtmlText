@@ -1,9 +1,13 @@
 package org.orca.htmltext.element
 
 import androidx.compose.foundation.clickable
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.TextStyle
@@ -24,4 +28,20 @@ val HtmlTextAnchor = HtmlElementRenderer { element, modifier ->
         ?.let { HtmlTextUnderline.Render(element, modifier.clickable { uriHandler.openUri(it) }) }
         ?: HtmlChildRenderer(element, modifier)
 
+    ProvideTextStyle(TextStyle(color = color)) {
+
+    }
+
 }
+
+private enum class ColorNames(val color: Color) {
+    Blah(Color.Red)
+}
+
+val color = ""
+    .takeIf { it.isNotBlank() }
+    ?.lowercase()
+    ?.let { ColorNames.entries.find { entry -> entry.name.lowercase() == it } }
+    ?.color
+    ?: LocalContentColor.current
+
