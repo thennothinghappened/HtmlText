@@ -1,31 +1,24 @@
-package org.orca.htmltext.elements
+package org.orca.htmltext.element
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import org.jsoup.nodes.Element
-import org.orca.htmltext.elements.HtmlParagraph
 import org.orca.htmltext.HtmlText
 
-@Composable
-internal fun HtmlTable(
-    node: Element,
-    modifier: Modifier = Modifier,
-    style: TextStyle,
-    uriHandler: UriHandler = LocalUriHandler.current,
-    domain: String? = null
+/**
+ * A HTML `table` element, which renders a grid of cells with an optional header row.
+ */
+val HtmlTable = HtmlElementRenderer { element, modifier ->
 
-) {
-    val children =  node.children()
+    val children =  element.children()
     val body = children.filter { it -> it.nodeName() == "tbody" }
 
-    HtmlParagraph {
+    HtmlParagraphDisplay {
         Column(
             modifier
                 .height(IntrinsicSize.Min)
@@ -46,12 +39,9 @@ internal fun HtmlTable(
                                     .fillMaxHeight()
                                     .border(1.dp, DividerDefaults.color)
                             ) {
-                                HtmlText(
+                                HtmlChildRenderer(
                                     tableCell,
-                                    Modifier.padding(8.dp),
-                                    style,
-                                    uriHandler,
-                                    domain
+                                    Modifier.padding(8.dp)
                                 )
                             }
                         }

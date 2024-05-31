@@ -1,4 +1,4 @@
-package org.orca.htmltext.elements
+package org.orca.htmltext.element
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -7,8 +7,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 
+val HtmlParagraph = HtmlElementRenderer { element, modifier ->
+    HtmlParagraphDisplay(modifier) {
+        HtmlChildRenderer(element)
+    }
+}
+
 @Composable
-internal fun HtmlParagraph(
+internal fun HtmlParagraphDisplay(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
