@@ -18,6 +18,7 @@ kotlin {
             dependencies {
                 implementation(project(":common"))
                 implementation(compose.desktop.currentOs)
+                implementation("org.jsoup:jsoup:1.15.3")
             }
         }
         val jvmTest by getting
