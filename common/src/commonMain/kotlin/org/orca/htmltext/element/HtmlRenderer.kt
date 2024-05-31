@@ -13,6 +13,36 @@ import org.orca.htmltext.util.nonEmptyChildren
 /**
  * [CompositionLocal] provider for a mapping between HTML tag names and renderers for them.
  * You can override this to change how elements are rendered, or to extend the element list with custom ones!
+ *
+ * **Example**:
+ * ```kt
+ * private val HtmlExample = HtmlElementRenderer { element, modifier ->
+ *     Card(modifier) {
+ *         HtmlParagraphDisplay {
+ *             HtmlChildRenderer(element)
+ *         }
+ *     }
+ * }
+ *
+ * @Composable
+ * fun App() {
+ *
+ *     val originalTagMap = LocalHtmlTextTagMap.current
+ *
+ *     val extendedTagMap = remember {
+ *         originalTagMap.extend(
+ *             "example" to HtmlExample
+ *         )
+ *     }
+ *
+ *     CompositionLocalProvider(LocalHtmlTextTagMap provides extendedTagMap) {
+ *         HtmlText(document)
+ *     }
+ *
+ * }
+ * ```
+ *
+ * Please note as well that you must have Jsoup included as a dependency directly to use this functionality.
  */
 val LocalHtmlTextTagMap = staticCompositionLocalOf {
     mapOf(
@@ -36,6 +66,14 @@ val LocalHtmlTextTagMap = staticCompositionLocalOf {
         "table" to HtmlTable
     )
 }
+
+/**
+ * Extend the list of element renderers with a new set of tags.
+ */
+fun Map<String, HtmlElementRenderer>.extend(vararg pairs: Pair<String, HtmlElementRenderer>) =
+    toMutableMap()
+        .also { it.putAll(pairs) }
+        .toMap()
 
 /**
  * The main renderer for elements. The renderer recurses down the tree of elements and matches element tags against

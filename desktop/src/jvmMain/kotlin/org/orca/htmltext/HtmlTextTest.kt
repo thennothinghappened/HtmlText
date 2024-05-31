@@ -3,12 +3,20 @@ package org.orca.htmltext
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.orca.htmltext.element.HtmlChildRenderer
+import org.orca.htmltext.element.HtmlElementRenderer
+import org.orca.htmltext.element.HtmlParagraphDisplay
+import org.orca.htmltext.element.LocalHtmlTextTagMap
+import org.orca.htmltext.element.extend
 
 private val input = """
 <html>
@@ -27,6 +35,9 @@ private val input = """
             <li>List item</li>
             <li>List item #2</li>
         </ul>
+        <example>
+            Hello!
+        </example>
     </blockquote>
     <table>
         <tbody>
@@ -36,10 +47,13 @@ private val input = """
             </tr>
             <tr>
                 <td>Yet another table item</td>
-                <td>One more table item again<ol>
-            <li>List item</li>
-            <li>List item #2</li>
-        </ol></td>
+                <td>
+                    One more table item again
+                    <ol>
+                        <li>List item</li>
+                        <li>List item #2</li>
+                    </ol>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -48,15 +62,34 @@ private val input = """
 </html>
     """.trimIndent()
 
+private val HtmlExample = HtmlElementRenderer { element, modifier ->
+    Card(modifier) {
+        HtmlParagraphDisplay {
+            HtmlChildRenderer(element)
+        }
+    }
+}
+
 @Composable
 private fun HtmlTextPreviewContent() {
-    Surface(Modifier.fillMaxSize()) {
-        HtmlText(
-            document = input,
-            modifier = Modifier.padding(8.dp),
-            style = MaterialTheme.typography.bodyMedium
+
+    val originalTagMap = LocalHtmlTextTagMap.current
+    val extendedTagMap = remember {
+        originalTagMap.extend(
+            "example" to HtmlExample
         )
     }
+
+    CompositionLocalProvider(LocalHtmlTextTagMap provides extendedTagMap) {
+        Surface(Modifier.fillMaxSize()) {
+            HtmlText(
+                document = input,
+                modifier = Modifier.padding(8.dp),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+
 }
 
 @Preview

@@ -13,8 +13,11 @@ val HtmlParagraph = HtmlElementRenderer { element, modifier ->
     }
 }
 
+/**
+ * Helper function that displays [content] consistent to the way HtmlText displays paragraphs.
+ */
 @Composable
-internal fun HtmlParagraphDisplay(
+fun HtmlParagraphDisplay(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
