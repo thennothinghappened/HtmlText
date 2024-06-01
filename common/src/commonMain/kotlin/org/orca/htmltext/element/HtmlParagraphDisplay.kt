@@ -1,11 +1,9 @@
 package org.orca.htmltext.element
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowRow
 
 val HtmlParagraph = HtmlElementRenderer { element, modifier ->
     HtmlParagraphDisplay(modifier) {
@@ -16,6 +14,7 @@ val HtmlParagraph = HtmlElementRenderer { element, modifier ->
 /**
  * Helper function that displays [content] consistent to the way HtmlText displays paragraphs.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun HtmlParagraphDisplay(
     modifier: Modifier = Modifier,
@@ -24,7 +23,8 @@ fun HtmlParagraphDisplay(
     FlowRow(
         modifier
             .fillMaxWidth()
-            .padding(0.dp, 8.dp),
-        content = content
-    )
+            .padding(0.dp, 8.dp)
+    ) {
+        content()
+    }
 }

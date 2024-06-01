@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowRow
+import androidx.compose.foundation.layout.FlowRow
 import org.jsoup.nodes.Element
 import org.orca.htmltext.util.nonEmptyChildren
 
@@ -60,6 +60,7 @@ private fun HtmlUnorderedListDecorator() {
 /**
  * HTML ordered or unordered list (`ol`, `ul`)
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun HtmlList(
     node: Element,

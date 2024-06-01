@@ -1,15 +1,16 @@
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.android.library)
     id("maven-publish")
 }
 
-val GITHUB_USER = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
-val GITHUB_TOKEN = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+val githubUser: String? = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
+val githubToken: String? = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
 
 kotlin {
+
     jvm("desktop")
     jvmToolchain(17)
 
@@ -20,43 +21,43 @@ kotlin {
     }
 
     sourceSets {
+
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 api(compose.material3)
-                implementation("ca.gosyer:accompanist-flowlayout:0.25.2")
-                implementation("org.jsoup:jsoup:1.15.3")
-                implementation("com.alialbaali.kamel:kamel-image:0.4.1")
+                implementation(libs.jsoup)
+                implementation(libs.kamelImage)
             }
         }
-        val androidMain by getting {
-            dependencies {
-                api("androidx.appcompat:appcompat:1.6.1")
-                api("androidx.core:core-ktx:1.12.0")
-            }
-        }
+
+        val androidMain by getting
+
         val desktopMain by getting {
             dependencies {
                 api(compose.preview)
             }
         }
+
     }
 }
 
 android {
+
     namespace = group.toString()
-    compileSdk = 34
+    compileSdk = libs.versions.android.sdk.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+
     defaultConfig {
-        minSdk = 24
-        compileSdk = 34
+        minSdk = libs.versions.android.sdk.minSdk.get().toInt()
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
 }
 
 publishing {
@@ -64,8 +65,8 @@ publishing {
         maven {
             setUrl("https://maven.pkg.github.com/thennothinghappened/HtmlText")
             credentials {
-                username = GITHUB_USER
-                password = GITHUB_TOKEN
+                username = githubUser
+                password = githubToken
             }
         }
     }

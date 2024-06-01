@@ -1,0 +1,48 @@
+
+[versions]
+
+#############################
+###    Plugin Versions    ###
+#############################
+
+### Compose Multiplatform ###
+compose = "1.6.10"
+
+### Kotlin ###
+kotlin = "1.9.23"
+
+### Gradle ###
+# Latest supported by Intellij IDEA 2024.2 is AGP 8.2.0
+# noinspection GradleDependency
+android-gradle-plugin = "8.2.0"
+
+#############################
+###   Library Versions    ###
+#############################
+
+# HTML parsing & nodes
+jsoup = "1.15.3"
+
+# Networked image loading
+kamelImage = "0.4.1"
+
+#############################
+###    Non-Gradle Data    ###
+#############################
+
+# Android SDK targets in Gradle
+android-sdk-minSdk = "24"
+android-sdk-compileSdk = "34"
+
+[libraries]
+
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+kamelImage = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kamelImage" }
+
+[plugins]
+
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
