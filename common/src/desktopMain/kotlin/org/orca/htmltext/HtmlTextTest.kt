@@ -12,11 +12,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.orca.htmltext.element.HtmlChildRenderer
-import org.orca.htmltext.element.HtmlElementRenderer
-import org.orca.htmltext.element.HtmlParagraphDisplay
-import org.orca.htmltext.element.LocalHtmlTextTagMap
-import org.orca.htmltext.element.extend
+import org.orca.htmltext.element.*
 
 private val input = """
 <html>
@@ -33,7 +29,8 @@ private val input = """
         <hr>
         <ul>
             <li>List item</li>
-            <li>List item #2</li>
+            <li><b>And a super super super long long long <u>list</u></b> item which takes up a heap of space and <i>hopefully</i> causes line breaks!</li>
+            <li>List item #3</li>
         </ul>
         <example>
             Hello!
@@ -51,7 +48,7 @@ private val input = """
                     One more table item again
                     <ol>
                         <li>List item</li>
-                        <li>List item #2</li>
+                        <li>List <b>item</b> #2</li>
                     </ol>
                 </td>
             </tr>

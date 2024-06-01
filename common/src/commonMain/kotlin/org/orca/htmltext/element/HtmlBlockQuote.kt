@@ -27,7 +27,7 @@ private fun HtmlBlockQuote(
 
     Row(
         Modifier
-            .padding(start = 8.dp)
+            .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
             .drawBehind {
                 drawLine(
                     color = lineColor,

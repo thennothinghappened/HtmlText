@@ -1,16 +1,13 @@
 package org.orca.htmltext.element
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.ui.unit.sp
 import org.jsoup.nodes.Element
 import org.orca.htmltext.util.nonEmptyChildren
 
@@ -35,26 +32,12 @@ private enum class HtmlListType {
 
 @Composable
 private fun HtmlOrderedListDecorator(index: Int) {
-    Text(text = "${index+1}.")
+    Text("${index + 1}.")
 }
 
 @Composable
 private fun HtmlUnorderedListDecorator() {
-
-    val size = 4.dp
-
-    Box(
-        Modifier
-            .padding(top = LocalTextStyle.current
-                .lineHeight
-                .value
-                .dp / 2 - size / 2
-            )
-            .size(size)
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.onSurface)
-    )
-
+    Text("•")
 }
 
 /**
@@ -70,17 +53,17 @@ private fun HtmlList(
     HtmlParagraphDisplay(modifier) {
         Column(Modifier.padding(start = 8.dp)) {
             node.nonEmptyChildren().forEachIndexed { index, listItem ->
-                Row {
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+
                     when (listType) {
                         HtmlListType.ORDERED -> HtmlOrderedListDecorator(index)
                         HtmlListType.UNORDERED -> HtmlUnorderedListDecorator()
                     }
 
-                    Spacer(Modifier.size(4.dp))
-
-                    FlowRow(Modifier.height(IntrinsicSize.Min)) {
+                    FlowRow {
                         HtmlChildRenderer(listItem)
                     }
+
                 }
             }
         }

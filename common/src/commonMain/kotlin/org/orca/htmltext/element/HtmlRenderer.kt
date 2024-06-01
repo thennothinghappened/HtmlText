@@ -85,7 +85,12 @@ fun HtmlChildRenderer(node: Node, modifier: Modifier = Modifier) {
     LocalHtmlTextTagMap.current.let { htmlTagMap ->
         node.nonEmptyChildren().forEach { child ->
             when (child) {
-                is TextNode -> { Text(text = child.text(), modifier = modifier) }
+                is TextNode -> {
+                    Text(
+                        text = child.text(),
+                        modifier = modifier
+                    )
+                }
                 is Element -> {
                     htmlTagMap.get(child.nodeName())
                         ?.let { it.Render(child, modifier) }
