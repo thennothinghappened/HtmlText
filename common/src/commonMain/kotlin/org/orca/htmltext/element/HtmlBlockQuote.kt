@@ -1,16 +1,12 @@
 package org.orca.htmltext.element
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 
 /**
@@ -27,20 +23,24 @@ private fun HtmlBlockQuote(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
+    val lineColor = DividerDefaults.color
+
     Row(
-        modifier
+        Modifier
             .padding(start = 8.dp)
-            .height(IntrinsicSize.Min)
+            .drawBehind {
+                drawLine(
+                    color = lineColor,
+                    start = Offset.Zero,
+                    end = Offset(0f, size.height),
+                    strokeWidth = 4f
+                )
+            }
+            .then(modifier)
     ) {
-        Box(
-            Modifier
-                .fillMaxHeight()
-                .width(4.dp)
-                .background(DividerDefaults.color)
-        )
         HtmlParagraphDisplay(
-            Modifier.padding(start = 8.dp),
-            content,
+            Modifier.padding(start = 16.dp),
+            content
         )
     }
 }
