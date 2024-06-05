@@ -1,6 +1,7 @@
-package org.orca.htmltext
+package org.orca.htmltext.test
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -12,6 +13,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.jsoup.nodes.Document
+import org.orca.htmltext.HtmlText
 import org.orca.htmltext.element.*
 
 private val input = """
@@ -59,6 +62,26 @@ private val input = """
 </html>
     """.trimIndent()
 
+private val inputDocument = Document("").apply {
+    appendElement("body").apply {
+
+        appendElement("h1").text("Hello!")
+
+        appendElement("p").apply {
+
+            appendText("This is some example text for showcasing ")
+
+            appendElement("a")
+                .text("HtmlText")
+                .attr("href", "https://github.com/thennothinghappened/HtmlText/")
+
+            appendText("'s support for inputting pre-made jsoup documents.")
+
+        }
+
+    }
+}
+
 private val HtmlExample = HtmlElementRenderer { element, modifier ->
     Card(modifier) {
         HtmlParagraphDisplay {
@@ -79,11 +102,18 @@ private fun HtmlTextPreviewContent() {
 
     CompositionLocalProvider(LocalHtmlTextTagMap provides extendedTagMap) {
         Surface(Modifier.fillMaxSize()) {
-            HtmlText(
-                document = input,
-                modifier = Modifier.padding(8.dp),
-                style = MaterialTheme.typography.bodyMedium
-            )
+            Column {
+                HtmlText(
+                    document = input,
+                    modifier = Modifier.padding(8.dp),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                HtmlText(
+                    document = inputDocument,
+                    modifier = Modifier.padding(8.dp),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 
