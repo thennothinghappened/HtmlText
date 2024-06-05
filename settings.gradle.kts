@@ -18,4 +18,4 @@ dependencyResolutionManagement {
     }
 }
 
-include(":common")
+include(":common", ":example")

@@ -7,7 +7,7 @@ plugins {
 }
 
 allprojects {
-    group = "org.orca.htmltext"
+
     version = "1.4.0"
 
     repositories {

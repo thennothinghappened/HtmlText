@@ -9,6 +9,8 @@ plugins {
 val githubUser: String? = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
 val githubToken: String? = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
 
+group = "org.orca.htmltext"
+
 kotlin {
 
     jvm("desktop")
@@ -33,12 +35,7 @@ kotlin {
         }
 
         val androidMain by getting
-
-        val desktopMain by getting {
-            dependencies {
-                api(compose.preview)
-            }
-        }
+        val desktopMain by getting
 
     }
 }

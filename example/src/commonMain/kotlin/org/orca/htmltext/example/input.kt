@@ -1,23 +1,8 @@
-package org.orca.htmltext.test
+package org.orca.htmltext.example
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import org.jsoup.nodes.Document
-import org.orca.htmltext.HtmlText
-import org.orca.htmltext.element.*
 
-private val input = """
+internal val input = """
 <html>
 <body>
     <h1>Page <u>Header</u>!</h1>
@@ -62,7 +47,7 @@ private val input = """
 </html>
     """.trimIndent()
 
-private val inputDocument = Document("").apply {
+internal val inputDocument = Document("").apply {
     appendElement("body").apply {
 
         appendElement("h1").text("Hello!")
@@ -79,58 +64,5 @@ private val inputDocument = Document("").apply {
 
         }
 
-    }
-}
-
-private val HtmlExample = HtmlElementRenderer { element, modifier ->
-    Card(modifier) {
-        HtmlParagraphDisplay {
-            HtmlChildRenderer(element)
-        }
-    }
-}
-
-@Composable
-private fun HtmlTextPreviewContent() {
-
-    val originalTagMap = LocalHtmlTextTagMap.current
-    val extendedTagMap = remember {
-        originalTagMap.extend(
-            "example" to HtmlExample
-        )
-    }
-
-    CompositionLocalProvider(LocalHtmlTextTagMap provides extendedTagMap) {
-        Surface(Modifier.fillMaxSize()) {
-            Column {
-                HtmlText(
-                    document = input,
-                    modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                HtmlText(
-                    document = inputDocument,
-                    modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-        }
-    }
-
-}
-
-@Preview
-@Composable
-private fun LightHtmlTextPreview() {
-    MaterialTheme {
-        HtmlTextPreviewContent()
-    }
-}
-
-@Preview
-@Composable
-private fun DarkHtmlTextPreview() {
-    MaterialTheme(darkColorScheme()) {
-        HtmlTextPreviewContent()
     }
 }
