@@ -79,23 +79,21 @@ fun Map<String, HtmlElementRenderer>.extend(vararg pairs: Pair<String, HtmlEleme
  * The main renderer for elements. The renderer recurses down the tree of elements and matches element tags against
  * the provided tag map from [LocalHtmlTextTagMap], and renders [TextNode] leafs as [Text].
  */
-@Suppress("ReplaceGetOrSet", "SimpleRedundantLet")
+@Suppress("ReplaceGetOrSet")
 @Composable
 fun HtmlChildRenderer(node: Node, modifier: Modifier = Modifier) {
-    LocalHtmlTextTagMap.current.let { htmlTagMap ->
-        node.nonEmptyChildren().forEach { child ->
-            when (child) {
-                is TextNode -> {
-                    Text(
-                        text = child.text(),
-                        modifier = modifier
-                    )
-                }
-                is Element -> {
-                    htmlTagMap.get(child.nodeName())
-                        ?.let { it.Render(child, modifier) }
-                        ?: HtmlChildRenderer(child, modifier)
-                }
+    node.nonEmptyChildren().forEach { child ->
+        when (child) {
+            is TextNode -> {
+                Text(
+                    text = child.text(),
+                    modifier = modifier
+                )
+            }
+            is Element -> {
+                LocalHtmlTextTagMap.current.get(child.nodeName())
+                    ?.Render(child, modifier)
+                    ?: HtmlChildRenderer(child, modifier)
             }
         }
     }
