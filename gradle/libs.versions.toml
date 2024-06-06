@@ -9,7 +9,7 @@
 compose = "1.6.10"
 
 ### Kotlin ###
-kotlin = "1.9.23"
+kotlin = "2.0.0"
 
 ### Gradle ###
 # Latest supported by Intellij IDEA 2024.2 is AGP 8.2.0
